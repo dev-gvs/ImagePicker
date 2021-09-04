@@ -10,13 +10,11 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
-import android.util.Log
 import androidx.activity.result.ActivityResult
 import com.github.drjacky.imagepicker.ImagePicker
 import com.github.drjacky.imagepicker.ImagePickerActivity
 import com.github.drjacky.imagepicker.R
 import com.github.drjacky.imagepicker.util.FileUriUtils
-import com.github.drjacky.imagepicker.util.FileUtil
 import com.github.drjacky.imagepicker.util.FileUtil.getCompressFormat
 import com.yalantis.ucrop.UCrop
 import java.io.ByteArrayOutputStream
@@ -94,7 +92,6 @@ class CropProvider(activity: ImagePickerActivity, private val launcher: (Intent)
      * Set to true to let user resize crop bounds (disabled by default)
      */
     fun isCropFreeStyleEnabled() = cropFreeStyle
-
 
     /**
      * Check if crop should be enabled or not
