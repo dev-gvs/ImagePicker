@@ -2,7 +2,7 @@
 <resources>
 
     <!-- ImagePicker string resource start -->
-    <string name="title_choose_image_provider">Выбирать</string>
+    <string name="title_choose_image_provider">Выберите</string>
     <string name="action_cancel">Отмена</string>
     <string name="title_gallery">Галерея</string>
     <string name="title_camera">Камера</string>
