@@ -94,6 +94,6 @@ ext {
     readmeName = 'CHANGELOG.md' //Optional Github readme file
 }
 
-//apply from: 'https://raw.githubusercontent.com/Drjacky/ImagePicker/master/bintray-install.gradle'
-//apply from: 'https://raw.githubusercontent.com/Drjacky/ImagePicker/master/bintray.gradle'
-apply from: "${rootProject.projectDir}/scripts/publish-mavencentral.gradle"
+// apply from: 'https://raw.githubusercontent.com/Drjacky/ImagePicker/master/bintray-install.gradle'
+// apply from: 'https://raw.githubusercontent.com/Drjacky/ImagePicker/master/bintray.gradle'
+// apply from: "${rootProject.projectDir}/scripts/publish-mavencentral.gradle"
