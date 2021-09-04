@@ -1,15 +1,12 @@
-apply plugin: 'com.android.application'
-
-apply plugin: 'kotlin-android'
-
-apply plugin: 'kotlin-android-extensions'
-
-apply from: "../ktlint.gradle"
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id "org.jlleitschuh.gradle.ktlint" version "10.1.0"
+}
 
 def keystorePropertiesFile = rootProject.file("keystore.properties")
-
 if (keystorePropertiesFile.exists()) {
-
     def key = new Properties()
 
     key.load(new FileInputStream(keystorePropertiesFile))
@@ -25,21 +22,22 @@ if (keystorePropertiesFile.exists()) {
             storeFile file(key['file'])
         }
     }
-
 }
 
 android {
-    compileSdkVersion 30
+    compileSdk 30
+
     defaultConfig {
         signingConfig signingConfigs.debug
         applicationId "com.github.drjacky.imagepicker.sample"
-        minSdkVersion 19
-        targetSdkVersion 30
+        minSdk 19
+        targetSdk 30
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
+
     buildTypes {
         release {
             debuggable true
@@ -49,22 +47,27 @@ android {
                 signingConfig signingConfigs.config
             }
         }
+
         debug {
             debuggable true
             signingConfig signingConfigs.debug
         }
     }
+
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8
     }
-    lintOptions{
+
+    lint {
         disable 'MissingTranslation'
     }
 }
