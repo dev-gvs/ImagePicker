@@ -13,7 +13,6 @@ import com.github.drjacky.imagepicker.R
 import com.github.drjacky.imagepicker.util.FileUtil
 import com.github.drjacky.imagepicker.util.IntentUtils
 import com.github.drjacky.imagepicker.util.PermissionUtil
-import java.io.File
 
 /**
  * Capture new image using camera
@@ -166,10 +165,10 @@ class CameraProvider(
      * After Camera Image Crop/Compress Original File will not required
      */
     fun delete() {
-        mCameraUri?.path?.let {
-            File(it).delete()
+        mCameraUri?.let {
+            contentResolver.delete(it, null, null)
+            mCameraUri = null
         }
-        mCameraUri = null
     }
 
     /**

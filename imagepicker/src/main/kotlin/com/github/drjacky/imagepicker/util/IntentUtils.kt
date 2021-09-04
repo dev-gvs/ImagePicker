@@ -93,11 +93,7 @@ object IntentUtils {
             ) // Tested API 21 Android version 5.0.1(Samsung S4)
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
-        } else {
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
-        }
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
 
         return intent
     }

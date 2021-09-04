@@ -180,15 +180,10 @@ class ImagePickerActivity : AppCompatActivity() {
     fun setCropImage(uri: Uri) {
         mCropUri = uri
 
-        mCameraProvider?.let {
-            // Delete Camera file after crop. Else there will be two image for the same action.
-            // In case of Gallery Provider, we will get original image path, so we will not delete that.
-            uri.path?.let {
-                // File(it).delete()
-                // mCameraProvider.delete()
-            }
-            mImageUri = null
-        }
+        // Delete original photo taken by camera
+        mCameraProvider?.delete()
+        // Delete image duplicate that was used as an input for UCrop
+        mCropProvider.delete()
 
         if (mCompressionProvider.isResizeRequired(uri)) {
             mCompressionProvider.compress(uri)

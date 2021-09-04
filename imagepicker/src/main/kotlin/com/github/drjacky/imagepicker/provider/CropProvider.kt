@@ -10,6 +10,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
+import android.util.Log
 import androidx.activity.result.ActivityResult
 import com.github.drjacky.imagepicker.ImagePicker
 import com.github.drjacky.imagepicker.ImagePickerActivity
@@ -126,7 +127,6 @@ class CropProvider(activity: ImagePickerActivity, private val launcher: (Intent)
             Environment.DIRECTORY_PICTURES
         }
         val extension = FileUriUtils.getImageExtension(uri)
-        cropImageUri = uri
 
         // Later we will use this bitmap to create the File.
         val selectedBitmap: Bitmap = getBitmap(this, uri)!!
@@ -135,8 +135,8 @@ class CropProvider(activity: ImagePickerActivity, private val launcher: (Intent)
             getExternalFilesDir(path),
             System.currentTimeMillis().toString() + "_selectedImg" + extension
         )
-
         convertBitmapToFile(selectedImgFile, selectedBitmap, extension)
+        cropImageUri = Uri.fromFile(selectedImgFile)
 
         /*We have to again create a new file where we will save the cropped image. */
         val croppedImgFile = File(
@@ -145,7 +145,7 @@ class CropProvider(activity: ImagePickerActivity, private val launcher: (Intent)
         )
 
         val options = UCrop.Options()
-        options.setCompressionFormat(FileUtil.getCompressFormat(extension))
+        options.setCompressionFormat(getCompressFormat(extension))
         options.setCircleDimmedLayer(cropOval)
         options.setFreeStyleCropEnabled(cropFreeStyle)
         val uCrop = UCrop.of(Uri.fromFile(selectedImgFile), Uri.fromFile(croppedImgFile))
@@ -218,8 +218,7 @@ class CropProvider(activity: ImagePickerActivity, private val launcher: (Intent)
     fun delete() {
         cropImageUri?.path?.let {
             File(it).delete()
+            cropImageUri = null
         }
-        cropImageUri = null
     }
-
 }
